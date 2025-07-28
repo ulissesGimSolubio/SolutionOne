@@ -1,0 +1,76 @@
+﻿@model Ecomerce.Models.Cidade
+
+@{
+    ViewData["Title"] = "Excluir Cidade";
+}
+
+<h1 class="text-danger"><i class="fa-solid fa-globe"></i> <i class="fa fa-trash"></i> Excluir Cidade</h1>
+
+<br />
+
+<div class="alert alert-secondary" role="alert">
+
+    <h4>@Html.DisplayFor(model => model.CidadeNome) - @Html.DisplayFor(model => model.Estado.EstadoSigla)</h4>
+
+    <hr>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CidadeNome)
+        </dt>
+        <dd class="col-sm-10">
+            <i class="fa-solid fa-location-dot"></i> @Html.DisplayFor(model => model.CidadeNome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CidadeCodigoIbge)
+        </dt>
+        <dd class="col-sm-10">
+            <i class="fa-solid fa-barcode"></i> @Html.DisplayFor(model => model.CidadeCodigoIbge)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+        <dd class="col-sm-10">
+            <i class="fa-solid fa-map"></i> @Html.DisplayFor(model => model.Estado.EstadoNome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ativo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ativo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+        <dd class="col-sm-10">
+            <i class="fa-solid fa-square-plus"></i> @Model.Created.ToString("dd/MM/yyyy HH:MM")
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Updated)
+        </dt>
+        <dd class="col-sm-10">
+            <i class="fa-solid fa-arrows-rotate"></i> @Model.Updated.ToString("dd/MM/yyyy HH:MM")
+        </dd>
+    </dl>
+</div>
+    
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Exclusão de registro!</strong> Têm certeza que deseja excluir a Cidade acima, esta ação não poderá ser desfeita!
+</div>
+
+<hr />
+
+<form asp-action="Inativar" asp-route-id="@Model.CidadeId">
+    <input type="hidden" asp-for="@Model.CidadeId" />
+    <button type="submit" title="Inativa o registro para não aparecer em lançametnos futuros "class="btn btn-dark"><i class="fa-regular fa-square"></i> Inativar </button>
+    &nbsp; <i class="fa-solid fa-circle-arrow-left"></i> <font color="red" size="4"><b>Considere inativar o registro.</b></font>
+</form>
+
+<hr />
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="CidadeId" />
+    <button type="submit" title="Remove o registro da Cidade." class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Excluir</button> &nbsp;
+    <a class="btn btn-warning" title="Retorna a listagem de Cidades." asp-action="Index"><i class="fa fa-reply" aria-hidden="true"></i> Voltar a lista</a>
+</form>
+
+<hr />

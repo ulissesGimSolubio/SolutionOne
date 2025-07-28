@@ -1,0 +1,23 @@
+﻿@{
+    int pagina = Convert.ToInt32(ViewData["pagina"]);
+    int totalPaginas = Convert.ToInt32(ViewData["totalPaginas"]);
+    int itensPorPagina = Convert.ToInt32(ViewData["itensPorPagina"]);
+    bool? ativo = ViewData["ativo"] as bool?;
+}
+
+<nav aria-label="...">
+    <ul class="pagination">
+        <li class="page-item @(pagina == 1 ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-pagina="@(pagina - 1)" asp-route-itensPorPagina="@itensPorPagina" asp-route-ativo="@ativo" title="Selecione a página anterior da busca.">Anterior</a>
+        </li>
+        @for (int i = 1; i <= totalPaginas; i++)
+        {
+            <li class="page-item @(i == pagina ? "active active-dark" : "")">
+                <a class="page-link" asp-action="Index" asp-route-pagina="@i" asp-route-itensPorPagina="@itensPorPagina" asp-route-ativo="@ativo">@i</a>
+            </li>
+        }
+        <li class="page-item @(pagina == totalPaginas ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-pagina="@(pagina + 1)" asp-route-itensPorPagina="@itensPorPagina" asp-route-ativo="@ativo" title="Selecione a próxima página da busca.">Próxima</a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,155 @@
+﻿@model IEnumerable<Ecomerce.Models.Endereco>
+
+@{
+    @* Variaveis de tela *@
+
+    ViewData["Title"] = "Endereços dos Parceiros";
+    int itensPorPaginaInt = Convert.ToInt32(ViewData["itensPorPagina"]);
+    var paginas = Ecomerce.Extensions.ConfigurationValuesDefaults.Pagination;
+    var count = Convert.ToInt32(ViewData["count"]);
+    string busca = ViewData["busca"] as string ?? "";
+    @* ativos ou não *@
+    var ativo = (bool)(ViewData["ativo"] ?? true);
+    var msgDelete = TempData["delete"] as string;
+    var msgSave = TempData["save"] as string;
+    var msgUpdate = TempData["update"] as string;
+    var msgDeleteFoto = TempData["delete-foto"] as string;
+    TempData["app"] = "IndexEndereços";
+
+}
+
+<h1><i class="fa-solid fa-signs-post"></i> Endereços</h1>
+
+<hr />
+
+<a asp-action="Create" class="btn btn-dark"><i class="fa fa-address-card" aria-hidden="true"></i> &nbsp; Novo Endereço</a>
+
+<br />
+<br />
+
+@if (msgDelete != null)
+{
+    <div id="alert" class="alert alert-danger" role="alert">
+        &#128721 @msgDelete
+    </div>
+
+    <script>
+        // Fecha o alerta após 5 segundos
+        setTimeout(function () {
+            $('#alert').fadeOut('slow');
+        }, 5000);
+    </script>
+}
+
+@if (msgSave != null || msgUpdate != null || msgDeleteFoto != null)
+{
+    <div id="alert" class="alert alert-secondary" role="alert">
+        <i class="fa-solid fa-check-to-slot"></i> @msgSave@msgUpdate@msgDeleteFoto
+    </div>
+
+    <script>
+        // Fecha o alerta após 5 segundos
+        setTimeout(function () {
+            $('#alert').fadeOut('slow');
+        }, 5000);
+    </script>
+}
+
+@* Componente de paginação e pesquisa *@
+
+<div class="d-flex justify-content-end">
+
+    @* Componente de pesquisa *@
+    @await Component.InvokeAsync("SearchForm", new { itensPorPagina = itensPorPaginaInt, paginas = paginas, busca = busca, ativo = (bool)(ViewData["ativo"] ?? true) })
+
+</div>
+
+<br />
+
+@* Tabela com os dados *@
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cep)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Logradouro)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Numero)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bairro)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cidade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EnderecoPrincipal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cliente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ativo)
+                </th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cep)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Logradouro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Numero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bairro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cidade.CidadeNome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EnderecoPrincipal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cliente.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ativo)
+                    </td>
+                    <td>
+                        @* Botões de ação do TagHelper *@
+                        <tagHelperButton ctype-button="Editar" croute-id="@item.EnderecoId"></tagHelperButton>
+                        <tagHelperButton ctype-button="Detalhes" croute-id="@item.EnderecoId"></tagHelperButton>
+                        <tagHelperButton ctype-button="Remover" croute-id="@item.EnderecoId"></tagHelperButton>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<br />
+
+<div class="d-flex justify-content-end">
+
+    @* Componente de paginação *@
+    @await Component.InvokeAsync("Pagination", new { pagina = Convert.ToInt32(ViewData["pagina"]), totalPaginas = Convert.ToInt32(ViewData["totalPaginas"]), itensPorPagina = Convert.ToInt32(ViewData["itensPorPagina"]) })
+
+</div>
+
+<vc:counter model-count="@Model.Count()"></vc:counter>
+
+<div class="alert alert-secondary" role="alert">
+    <h5 class="alert-heading">Nota!</h5>
+    <i class="fa-solid fa-circle-info"></i> Para efetuar a consulta, basta <b>digitar no campo de busca</b> e clicar em <b>Buscar cliente</b> ou <b>apertar enter</b> no próprio campo.
+</div>

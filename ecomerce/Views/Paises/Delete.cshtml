@@ -1,0 +1,86 @@
+﻿@model Ecomerce.Models.Pais
+
+@{
+    ViewData["Title"] = "Excluir País";
+}
+
+<h1 class="text-danger"<i class="fa-solid fa-globe"></i> <i class="fa fa-trash"></i> Exclusão de País</h1>
+
+<br />
+
+<div class="alert alert-secondary" role="alert">
+    <h4>@Html.DisplayFor(model => model.PaisNome)</h4>
+    <hr>
+    <div>
+
+        <div class="col-md-8">
+
+            <dl class="row">
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.PaisNome)
+                </dt>
+                <dd class="col-sm-9">
+                    <i class="fa-solid fa-font"></i> @Html.DisplayFor(model => model.PaisNome)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.PaisNomeIngles)
+                </dt>
+                <dd class="col-sm-9">
+                    <i class="fa-solid fa-earth-americas"></i> @Html.DisplayFor(model => model.PaisNomeIngles)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.PaisIsoCodigo)
+                </dt>
+                <dd class="col-sm-9">
+                    <i class="fa-solid fa-people-arrows"></i> @Html.DisplayFor(model => model.PaisIsoCodigo)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.PaisCodigo)
+                </dt>
+                <dd class="col-sm-9">
+                    <i class="fa-solid fa-barcode"></i> @Html.DisplayFor(model => model.PaisCodigo)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.PaisMoeda)
+                </dt>
+                <dd class="col-sm-9">
+                    <i class="fa-solid fa-coins"></i> @Html.DisplayFor(model => model.PaisMoeda)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.PaisMoedaAbrev)
+                </dt>
+                <dd class="col-sm-9">
+                    <i class="fa-solid fa-coins"></i> @Html.DisplayFor(model => model.PaisMoedaAbrev)
+                </dd>                
+            </dl>
+
+        </div>
+
+    </div>
+    
+</div>
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Exclusão de registro!</strong> Têm certeza que deseja excluir o País acima, esta ação não poderá ser desfeita!
+</div>
+
+<hr />
+
+<form asp-action="Inativar" asp-route-id="@Model.PaisId">
+    <input type="hidden" asp-for="@Model.PaisId" />
+    <button type="submit" title="Inativar o registro para não ser utilizado em lançamentos futuros."  class="btn btn-dark"><i class="fa-regular fa-square"></i> Inativar </button>
+    &nbsp; <i class="fa-solid fa-circle-arrow-left"></i> <font color="red" size="4"><b>Considere inativar o registro.</b></font>
+</form>
+
+<hr />
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="PaisId" />
+    <button type="submit" title="Remover o registro." class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Excluir</button> &nbsp;
+    <a class="btn btn-warning" title="Retornar a lista de Paises." asp-action="Index"><i class="fa fa-reply" aria-hidden="true"></i> Voltar a lista</a>
+</form>
+
+<hr />
+
+

@@ -1,0 +1,57 @@
+﻿@page
+@model PersonalDataModel
+@{
+    ViewData["Title"] = "Dados pessoais";
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<div class="row">
+    <div class="col-md-12">
+        <p>Sua conta contém dados pessoais que você nos forneceu. Esta página permite que você baixe ou exclua esses dados.</p>
+        <p>
+            <strong>A exclusão desses dados removerá permanentemente sua conta, e isso não poderá ser recuperado.</strong>
+        </p>
+        <form id="download-data" asp-page="DownloadPersonalData" method="post">
+            <button class="btn btn-dark" type="submit"><i class="fa-solid fa-download"></i> Download</button>
+            <a id="delete" asp-page="DeletePersonalData" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Excluir</a>
+        </form>
+
+        <br />
+
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Nota!</h4>
+            <p>
+                <i class="fa-solid fa-info"></i> Clique em <b>Download</b> e salve todas as suas informações em um arquivo no formato <b><a href="https://pt.wikipedia.org/wiki/JSON#:~:text=O%20JSON%20%C3%A9%20um%20formato,converter%20para%20objetos%20da%20linguagem.">JASON</a></b>.
+            </p>
+        </div>
+
+        <br />
+
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Nota!</h4>
+
+            <p>
+                <i class="fa-solid fa-triangle-exclamation"></i> Clique em <b><font color="red">Excluir</b></font> e remova seus dados de todos os nossos servidores, mas <font color="red"><b>esse processo excluirá a sua conta permanentemente</b></font>,
+                juntamente com todas as suas informações. Esta ação não pode ser desfeita, pense bem!
+            </p>
+            <hr>
+            <p class="mb-0">Se estiver pensando em excluir a sua conta, esperamos que reconsidere, você é importante para nós!</p>
+        </div>
+
+        @*
+        <p>
+        <a id="delete" asp-page="DeletePersonalData" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Excluir</a>
+        </p>
+        *@
+
+    </div>
+</div>
+
+<br />
+<br />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

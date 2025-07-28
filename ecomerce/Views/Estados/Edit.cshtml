@@ -1,0 +1,108 @@
+﻿@model Ecomerce.Models.Estado
+
+
+@{
+    ViewData["Title"] = "Atualização de Estado (UF)";
+}
+
+<h3><i class="fa-solid fa-arrows-rotate"></i> Atualização de Estado (UF) </h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EstadoId" />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <select title="Status do registro." asp-for="Ativo" class="custom-select bg-dark text-white py-1" style="width: 100px; text-align: center">
+                            <option value="true">Ativo</option>
+                            <option value="false">Inativo</option>
+                        </select>
+                        <span asp-validation-for="Ativo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        * <label asp-for="EstadoNome" class="control-label label-required"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-text-width"></i></span>
+                            <input asp-for="EstadoNome" title="Nome do Estado para identificação." class="form-control" placeholder="Ex. Goi" />
+                        </div>
+                        <span asp-validation-for="EstadoNome" class="text-danger"></span>
+                    </div>
+                    
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        * <label asp-for="EstadoSigla" class="control-label label-required"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-text-width"></i></span>
+                            <input asp-for="EstadoSigla" title="Sigla do Estado." class="form-control" placeholder="Ex, GO" />
+                        </div>
+                        <span asp-validation-for="EstadoSigla" class="text-danger"></span>
+                    </div>
+
+                   
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-5">
+
+                    <div class="form-group">
+                        <label asp-for="EstadoCodIbge" class="control-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-text-width"></i></span>
+                            <input asp-for="EstadoCodIbge" title="Código do Estado fornecido pelo IBGE. do registro." class="form-control" placeholder="Ex, 99999" />
+                        </div>
+                        <span asp-validation-for="EstadoCodIbge" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-5">
+
+                    <div class="form-group">
+                        * <label asp-for="PaisId" class="control-label label-required"></label>
+                        <select asp-for="PaisId" id="mySelect" class="form-control" asp-items="ViewBag.PaisId"></select>
+                    </div>
+
+                </div>
+            </div> 
+            
+            <hr />
+
+            <div class="form-group">
+                <button type="submit" title="Gravar as Informações do Estado." class="btn btn-dark"><i class="fa-solid fa-floppy-disk"></i> Gravar</button> &nbsp;
+                <a class="btn btn-warning" title="Retornar a lista de Estados." asp-action="Index"><i class="fa-solid fa-circle-arrow-left"></i> Voltar</a>
+            </div>
+
+            <hr />
+
+        </form>
+
+        <a class="btn btn-dark" asp-area="" title="Efetue o registro de um novo Pais." asp-controller="Paises" asp-action="Index"><i class="fa-solid fa-globe"></i> &nbsp; Novo Pais</a>
+
+        <hr />
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

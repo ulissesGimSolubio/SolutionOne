@@ -1,0 +1,200 @@
+﻿@model Ecomerce.Models.Endereco
+
+@{
+    ViewData["Title"] = "Criação de Novo Endereço";
+    TempData["app"] = "CreateEndereços";
+
+}
+
+<h3><i class="fa-solid fa-square-plus"></i> Novo Endereço </h3>
+
+<hr />
+
+<div class="row">
+
+    <div class="col-md-8">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+
+                <div class="col-md-3">
+
+                    <div class="form-group">
+                        * <label asp-for="Cep" class="control-label label-required"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-signs-post"></i></span>
+                            <input asp-for="Cep" id="CEP" title="Número de identificação postal.." class="form-control" placeholder="Ex. 75.000-000" />
+                        </div>
+                        <span asp-validation-for="Cep" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        * <label asp-for="Logradouro" class="control-label label-required"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-text-width"></i></span>
+                            <input asp-for="Logradouro" title="Nome descritivo para o endereço." class="form-control" placeholder="Ex. Av. das Alamedas." />
+                        </div>
+                        <span asp-validation-for="Logradouro" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="form-group">
+                        <label asp-for="Numero" class="control-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-list-ol"></i></span>
+                            <input asp-for="Numero" id="Numero" type="number" maxlength="9" max="999999999" title="Número para identificação do endereço, utilize apenas números e até 9 caracteres." class="form-control" placeholder="Ex. 999" />
+                        </div>
+                        <span asp-validation-for="Numero" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="form-group">
+                        <label asp-for="Complemento" class="control-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-font"></i></span>
+                            <textarea asp-for="Complemento" id="complemento" row="5" cols="10" title="Informações que complementem o endereço." class="form-control" placeholder="Ex. Próximo a antena, na casa a direita, com portão preto."></textarea>
+                        </div>
+                        <span asp-validation-for="Complemento" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="col-md-12">
+
+                        <div class="form-group">
+                            <label asp-for="InformacaoReferencia" class="control-label"></label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-text-width"></i></span>
+                                <textarea asp-for="InformacaoReferencia" row="5" cols="10" title="Informações de referência para entrega." class="form-control" placeholder="Ex. Entregar na recepção.."></textarea>
+                            </div>
+                            <span asp-validation-for="InformacaoReferencia" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        * <label asp-for="Bairro" class="control-label label-required"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-text-width"></i></span>
+                            <input asp-for="Bairro" title="Bairro de localização dentro Município/Cidade." class="form-control" placeholder="Ex. Central." />
+                        </div>
+                        <span asp-validation-for="Bairro" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <div class="form-group">
+                        * <label asp-for="CidadeId" class="control-label label-required"></label>
+                        <select asp-for="CidadeId" id="mySelect" class="form-control" asp-items="ViewBag.CidadeId"></select>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        * <label asp-for="ClienteId" class="control-label label-required"></label>
+                        <select asp-for="ClienteId" id="mySelect2" class="form-control" asp-items="ViewBag.ClienteId"></select>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr />
+
+            <div class="row">
+
+                <div class="col-md-8">
+
+                    <div class="form-check form-switch">
+                        <input asp-for="EnderecoPrincipal" title="Marque caso este endereço seja o principal, para notificações e entregas." type="checkbox" class="form-check-input" style="transform: scale(1.25); margin-right: 5px;" /> &nbsp;
+                        <label asp-for="EnderecoPrincipal" title="Marque caso este endereço seja o principal, para notificações e entregas." class="control-label" style="font-size:20px;"></label>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr />
+
+            <div class="form-group">
+                <button type="submit" title="Gravar as informações do Endereço." class="btn btn-dark"><i class="fa-solid fa-floppy-disk"></i> Gravar</button> &nbsp;
+                <a class="btn btn-warning" title="Retornar a lista de Endereços." asp-action="Index"><i class="fa-solid fa-circle-arrow-left"></i> Voltar</a>
+            </div>
+
+            <hr />
+
+            <a class="btn btn-dark" asp-area="" title="Efetue o registro de uma nova Cidade, mas lembre-se, para uma Cidade você precisa de um estado para vincular." asp-controller="Cidades" asp-action="Index"><i class="fa-solid fa-signs-post"></i> &nbsp; Nova Cidade</a>
+            <a asp-action="Create" class="btn btn-dark" title="Efetue o registro de um novo Estado, mas lembre-se, para um Estado você precisa de um país para vincular."><i class="fa-solid fa-map"></i> &nbsp; Novo Estado</a>
+            <a class="btn btn-dark" asp-area="" title="Efetue o registro de um novo Pais." asp-controller="Paises" asp-action="Index"><i class="fa-solid fa-globe"></i> &nbsp; Novo Pais</a>
+
+            <hr />
+
+        </form>
+    </div>
+
+
+    <div class="col-md-4">
+        <div id="alert" class="alert alert-secondary" role="alert">
+            <i class="fa-solid fa-circle-info"></i> <b>Campo (@Html.DisplayNameFor(model => model.Numero)): </b> Caso seja necessário informar <b>S/N</b>, deixe o campo sem informações "<b>Em branco</b>".
+        </div>
+
+        <div id="alert" class="alert alert-secondary" role="alert">
+            <i class="fa-solid fa-circle-info"></i> <b>Campo (@Html.DisplayNameFor(model => model.Complemento)): </b> Caso seja necessário informe um detalhamento mais rico de informações".
+        </div>
+
+        <div id="alert" class="alert alert-secondary" role="alert">
+            <i class="fa-solid fa-truck-arrow-right"></i> <b>Campo (@Html.DisplayNameFor(model => model.InformacaoReferencia)): </b> Caso seja necessário informe um detalhamento de entrega, por exemplo:.
+            <br /> <i class="fa-solid fa-circle-check"></i> Entregar na portaria do prédio.
+            <br /> <i class="fa-solid fa-circle-check"></i> Entregar para João Smith.
+            <br /> <i class="fa-solid fa-circle-check"></i> Entregar em Horário comercial da 07h as 17h (<b>Fecha para almoço das 11h as 13h</b>).
+        </div>
+
+        <div id="alert" class="alert alert-secondary" role="alert">
+            <i class="fa-solid fa-circle-info"></i> <b>Caixa de seleção (@Html.DisplayNameFor(model => model.EnderecoPrincipal)[..^1]): </b> Sempre avaliar se pelo menos 1 (um) dos endereços está marcado como endereço principal para entregas. <i class="fa-solid fa-square-check"></i>
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,288 @@
+/* Configurações gerais layout original */
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-group {
+    padding: 5px;
+}
+
+/* Para o FOOTER da Aplicação*/
+
+footer {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-align: left;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    z-index: 99999999;
+}
+
+
+/* Menu lateral SIDEBAR */
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 100000000; /* Definindo um z-index alto */
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #818181;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+.sidenav .dropdown-container {
+    display: none;
+    background-color: #262626;
+    padding-left: 8px;
+}
+
+.sidenav .dropdown-btn i {
+    float: right;
+    padding-right: 10px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 32px;
+    margin-left: 50px;
+}
+
+/* Para a parte de configurações do usuário */
+
+/* Define a cor dark para a classe .active */
+.nav-item .nav-link.active {
+    background-color: #343a40; /* Cor dark do Bootstrap */
+    color: white; /* Cor do texto */
+}
+
+.nav-item .nav-link {
+    color: black; /* Cor do texto */
+}
+
+.page-link:hover {
+    color: #343a40 !important; /* Cor de texto escura */
+}
+
+
+.page-link:not(.active-dark) {
+    color: #343a40 !important; /* Cor de texto escura */
+}
+
+.page-link {
+    color: #343a40 !important; /* Cor de texto escura */
+}
+
+.active-dark .page-link {
+    background-color: #343a40 !important; /* Cor de fundo escura */
+    color: white !important; /* Cor de texto branca */
+    border-color: #343a40 !important; /* Cor da borda escura */
+}
+
+/* Tabela de listagem de dados */
+
+th, td {
+    max-width: 200px; /* Defina o tamanho máximo desejado */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adiciona "..." ao final do texto que ultrapassa o tamanho máximo */
+    white-space: nowrap; /* Evita que o texto seja quebrado em várias linhas */
+}
+
+.table thead th {
+    background-color: #343a40;
+    color: white;
+}
+
+.sort-icon {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.sort-icon.asc {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid;
+}
+
+.sort-icon.desc {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid;
+}
+
+.sort-link {
+    color: white !important;
+    text-decoration: none; /* Adicionado para remover o sublinhado */
+}
+
+/* Para labels de campos obrigatórios*/
+.label-required {
+    color: red;
+    font-weight: bold;
+}
+
+
+
+/* Imagem do cliente*/
+
+.img-profile {
+    border: 1px solid #ddd;
+    border-color: darkgray;
+    border-radius: 4px;
+    padding: 15px;
+    max-width: 350px;
+    height: auto;
+}
+
+.img-profile-edit {
+    border: 1px solid #ddd;
+    border-color: darkgray;
+    border-radius: 4px;
+    padding: 15px;
+    max-width: 350px;
+    height: auto;
+}
+
+.img-profile img:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+/* Personalização de tema */
+
+.btn-template-asp {
+    color: #fff;
+    background-color: #23272B; /*Cor do botão*/
+    border-color: #23272B;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    text-decoration: none; /* Remover sublinhado */
+    display: inline-block;   
+    border: none;
+}
+
+.btn-template-asp:hover {
+    background-color: #15171A; /*Cor do botão ao passar mouse*/
+    border-color: #15171A;
+    color: #fff; /* Alterando a cor do texto ao passar o mouse */
+}
+
+.btn-template-asp:focus {
+    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
+}
+
+/* Estilos para select */
+select.btn-template-asp {
+    appearance: none; /* Remover estilo padrão */
+    -webkit-appearance: none; /* Remover estilo padrão no Safari */
+    -moz-appearance: none; /* Remover estilo padrão no Firefox */
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    background-color: #23272B;
+    color: #fff;
+    border: none;
+}
+
+select.btn-template-asp:hover {
+    background-color: #15171A;
+}
+
+/*Select2 dark*/
+
+/* Estilos personalizados para o Select2 dark */
+.select2-dark .select2-selection {
+    background-color: #333 !important;
+    color: #fff !important;
+    border-color: #555 !important;
+}
+
+.select2-dark .select2-selection__arrow {
+    color: #fff !important;
+}
+
+.select2-dark .select2-selection__rendered {
+    color: #fff !important;
+}
+
+.select2-dark .select2-results__option {
+    color: #fff !important;
+    background-color: #333 !important;
+}
+
+.select2-dark .select2-results__option--highlighted {
+    background-color: #555 !important;
+}
+
+.select2-dark .select2-results__option--selected {
+    background-color: #555 !important;
+}
+
+.select2-dark .select2-dropdown {
+    background-color: #333 !important;
+    border-color: #555 !important;
+}
+
+

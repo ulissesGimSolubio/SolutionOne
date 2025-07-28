@@ -1,0 +1,194 @@
+﻿@model Ecomerce.Models.Cliente
+
+@{
+    ViewData["Title"] = "Novo Parceiro de Negócios";
+}
+
+<h3><i class="fa-solid fa-square-plus"></i> Novo Parceiro de Negócios</h3>
+
+<hr />
+
+<div class="row">
+
+    <div class="col-md-8">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+
+                <div class="col-md-5">
+
+                    <div class="form-group">
+                        * <label asp-for="CpfCnpj" class="control-label label-required"></label>
+                        <div class="input-group">
+                            <select asp-for="TPessoa" id="tipoPessoa" class="custom-select bg-dark text-white py-1" style="width: 100px; text-align: center" onchange="limparCampo()">
+                                <option value="0">FISICA</option>
+                                <option value="1">JURIDICA</option>
+                            </select>
+                            <input asp-for="CpfCnpj" pattern="\d*" maxlength="18" id="CpfCnpj" class="form-control" onkeyup="formatarDocumento()" title="Digite no máximo 14 caracteres para CPF e 18 para CNPJ" />
+                        </div>
+                        <span asp-validation-for="CpfCnpj" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="col-md-7">
+
+                    <div class="form-group">
+                        * <label asp-for="Nome" class="control-label label-required"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-text-width"></i></span>
+                            <input asp-for="Nome" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Nome" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                       <label asp-for="NomeRazaoSoc" class="control-lab"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-text-width"></i></span>
+                            <input asp-for="NomeRazaoSoc" class="form-control" />
+                        </div>
+                        <span asp-validation-for="NomeRazaoSoc" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>            
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="form-group">
+                        * <label asp-for="Email" class="control-label label-required"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">@@</span>
+                            <input asp-for="Email" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="form-group">
+                        <label asp-for="Apelido" class="control-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-text-width"></i></span>
+                            <input asp-for="Apelido" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Apelido" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label asp-for="Celular" class="control-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone-square" aria-hidden="true"></i></span>
+                            <input asp-for="Celular" id="phoneInputMask_Movel" placeholder="(XX) X XXXX-XXXX" data-mask="(XX) X XXXX-XXXX" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Celular" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label asp-for="TelefoneFixo" class="control-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone-square" aria-hidden="true"></i></span>
+                            <input asp-for="TelefoneFixo" id="phoneInputMask_fixed" placeholder="(XX) XXXX-XXXX" data-mask="(XX) XXXX-XXXX" class="form-control" />
+                        </div>                        
+                        <span asp-validation-for="TelefoneFixo" class="text-danger"></span>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        * <label asp-for="Genero" class="control-label label-required"></label>
+                        <select asp-for="Genero" class="form-control">
+                            <option value="Masculino">Masculino</option>
+                            <option value="Feminino">Feminino</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        * <label asp-for="DataNascimento" class="control-label label-required"></label>
+                        <input asp-for="DataNascimento" type="date"  class="form-control" />
+                        <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="UpImage" class="control-label">Foto para identificação</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-file-image" aria-hidden="true"></i></span>
+                            <input asp-for="UpImage" type="file" class="form-control" data-val="false" />
+                        </div>                        
+                        <span asp-validation-for="UpImage" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-">
+                    <div class="form-group">
+                        <label asp-for="Info" class="control-label"></label>                        
+                        <textarea asp-for="Info" rows="4" style="width: 100%;"></textarea>                        
+                        <span asp-validation-for="Info" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>                      
+
+            <hr />
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-dark"><i class="fa-solid fa-floppy-disk"></i> Gravar</button> &nbsp;
+                <a class="btn btn-warning" asp-action="Index"><i class="fa-solid fa-circle-arrow-left"></i> Voltar</a>
+            </div>
+
+            <hr />
+
+        </form>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

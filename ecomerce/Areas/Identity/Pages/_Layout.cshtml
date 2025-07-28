@@ -1,0 +1,40 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+
+<environment include="Development">
+    <link href="~/lib/font-awesome/all.min.css" rel="stylesheet" />
+</environment>
+
+<environment exclude="Development">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" asp-append-version="true" />
+</environment>
+
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+<h1>Gerenciar sua conta</h1>
+
+<div>
+    <h3>Altere as configurações da sua conta</h3>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <partial name="_ManageNav" />
+        </div>
+        <div class="col-md-8">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

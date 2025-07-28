@@ -1,0 +1,266 @@
+﻿@model Ecomerce.Models.Cliente
+
+@{
+    ViewData["Title"] = "Detalhes do parceiro de negócios";   
+    TempData["app"] = "DetailsClientes";
+    var msgDelete = TempData["delete"] as string;
+    var msgSave = TempData["save"] as string;
+    var msgUpdate = TempData["update"] as string;
+    TempData["ClienteCpfCnpj"] = @Model.CpfCnpj;
+    TempData["ClienteNome"] = @Model.Nome;
+}
+
+<h1><i class="fa-solid fa-user-tie"></i> Detalhes do Parceiro de Negócios</h1>
+
+<br />
+
+@if (msgDelete != null)
+{
+    <div id="alert" class="alert alert-danger" role="alert">
+        &#128721 @msgDelete
+    </div>
+
+    <script>
+        // Fecha o alerta após 5 segundos
+        setTimeout(function () {
+            $('#alert').fadeOut('slow');
+        }, 5000);
+    </script>
+}
+
+@if (msgSave != null || msgUpdate != null)
+{
+    <div id="alert" class="alert alert-secondary" role="alert">
+        <i class="fa-solid fa-check-to-slot"></i> @msgSave@msgUpdate
+    </div>
+
+    <script>
+        // Fecha o alerta após 5 segundos
+        setTimeout(function () {
+            $('#alert').fadeOut('slow');
+        }, 5000);
+    </script>
+}
+
+<div class="alert alert-secondary" role="alert">
+    <h4>Parceiro: @Html.DisplayFor(model => model.Nome)</h4>
+    <hr>
+    <div>
+        <div class="row">
+
+            <div class="col-md-8">
+
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        @{
+                            var nomeDocumento = Ecomerce.Extensions.Helpers.TipoPessoa(Model.CpfCnpj);
+                        }
+                        @nomeDocumento:
+                    </dt>
+                    <dd class="col-sm-9">
+                        @{
+                            var cpfCnpjFormatado = Ecomerce.Extensions.Helpers.FormatarCpfCnpj(Model.CpfCnpj);
+                        }
+                        @cpfCnpjFormatado
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Nome)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.NomeRazaoSoc)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.NomeRazaoSoc)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Apelido)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Apelido)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Genero)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Genero)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.DataNascimento)
+                    </dt>
+                    <dd class="col-sm-9">
+                        <i class="fa-solid fa-calendar-days"></i> @Model.DataNascimento.ToString("dd/MM/yyyy")
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Celular)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @{
+                            var phone_1 = Ecomerce.Extensions.Helpers.FormatCellPhone(Model.Celular);
+                        }
+                        <i class="fa-solid fa-mobile-screen-button"></i> @phone_1
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.TelefoneFixo)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @{
+                            var phone_2 = Ecomerce.Extensions.Helpers.FormatCellPhone(Model.TelefoneFixo);
+                        }
+                        <i class="fa-solid fa-phone"></i> @phone_2
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Ativo)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @{
+                            if (Model.Ativo)
+                            {
+                                <i class="fa fa-check-square" aria-hidden="true"></i>
+                            }
+                            else
+                            {
+                                <i class="fa fa-square-o" aria-hidden="true"></i>
+                            }
+                        }
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Created)
+                    </dt>
+                    <dd class="col-sm-9">
+                        <i class="fa-solid fa-square-plus"></i> @Model.Created.ToString("dd/MM/yyyy HH:MM")
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Updated)
+                    </dt>
+                    <dd class="col-sm-9">
+                        <i class="fa-solid fa-arrows-rotate"></i> @Model.Updated.ToString("dd/MM/yyyy HH:MM")
+                    </dd>
+                </dl>
+
+            </div>
+
+            <div class="col-md-4">
+
+                @{
+                    var foto = @Model.Image;
+
+                    if (foto == null)
+                    {
+                        <div class="col-md-4 d-flex justify-content-center align-items-center mt-3">
+                            <img src="~/images/cliente-images/sem_foto.png" class="img-profile" alt="Imagem do cliente">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-4 d-flex justify-content-center align-items-center mt-3">
+                            <img src="~/images/cliente-images/@foto" class="img-profile" alt="Imagem do cliente">
+                        </div>
+                    }
+                }
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="row">
+
+            @if(Model.Enderecos.Count > 0)
+            {
+                    
+                <hr />
+                
+                <div class="alert alert-secondary" role="alert">
+                    <h4><i class="fa-solid fa-signs-post"></i> Endereços</h4>
+                    <hr />
+                    <i class="fa-solid fa-circle-info"></i> &nbsp;<b>Aqui você encontra todos os endereços, permitindo <i class="fa-solid fa-square-pen"></i> Atualizar, <i class="fa-solid fa-trash-can"></i> Remover ou <i class="fa-solid fa-square-plus"></i> Adicionar novos se necessário.</b>
+                </div>
+                <hr />
+                
+                @foreach (var item in Model.Enderecos)
+                {
+                    <div class="col-md-6">
+
+                        <div class="alert alert-secondary" role="alert">
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @{
+                                            var principal = item.EnderecoPrincipal;
+
+                                            if (principal)
+                                            {
+                                                <div class="form-check form-switch">
+                                                    <b>Este é Endereço Principal:</b> &nbsp; <input disabled type="checkbox" checked class="form-check-input" style="transform: scale(1.25); margin-right: 5px;" /> &nbsp;
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="form-check form-switch">
+                                                    Endereço Principal: &nbsp;<input disabled type="checkbox" class="form-check-input" style="transform: scale(1.25); margin-right: 5px;" /> &nbsp;
+                                                </div>
+                                            }
+                                        }
+                                        <hr />
+                                        <b>CEP: </b>@Ecomerce.Extensions.Helpers.FormatarCep(@item.Cep);
+                                        <br /><b>Endereço:</b> @item.Logradouro, @item.Numero
+                                        @if (!string.IsNullOrEmpty(item.Complemento))
+                                        {
+                                            <br />
+
+                                            <b>Complemento:</b> @item.Complemento@(".")
+                                        }else{
+                                            <br />
+                                        <b>Complemento:</b> @("Não informado")
+                                        }                                 
+                                        <br /><b>Bairro:</b> @item.Bairro. <b>Cidade:</b> @item.Cidade.CidadeNome - @item.Cidade.Estado.EstadoSigla.
+                                        <hr />                                       
+                                        <a class="btn btn-dark" asp-action="Edit" asp-controller="Enderecos" asp-route-id="@item.EnderecoId"><i class="fa-sharp fa-solid fa-pencil"></i> Atualizar</a> &nbsp;
+                                        <a class="btn btn-danger" asp-action="Delete" asp-controller="Enderecos" asp-route-id="@item.EnderecoId"><i class="fa-sharp fa-solid fa-trash"></i> Remover</a> &nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+                    
+            }
+            else
+            {
+                <div class="col-md-12">
+                    <h4>Endereços</h4>
+                    <hr />
+                    <div class="alert alert-secondary" role="alert">
+                        <i class="fa-solid fa-info"></i> Este parceiro de negócios não possui endereços cadastrados.
+                    </div>
+                </div>
+            } 
+        </div>
+
+    </div>
+
+</div>
+
+<hr />
+
+<div>
+    <a class="btn btn-dark" asp-action="Edit" asp-route-id="@Model?.CpfCnpj"><i class="fa-sharp fa-solid fa-pencil"></i> Atualizar Parceiro</a> &nbsp;
+    <a class="btn btn-warning" asp-action="Index"><i class="fa fa-reply" aria-hidden="true"></i> Voltar</a>
+</div>
+
+<hr />

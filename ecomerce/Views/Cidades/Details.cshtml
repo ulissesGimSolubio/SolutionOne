@@ -1,0 +1,64 @@
+﻿@model Ecomerce.Models.Cidade
+
+@{
+    ViewData["Title"] = "Detalhes da Cidade";
+}
+
+<h1><i class="fa-solid fa-location-dot"></i> Detalhes da Cidade</h1>
+
+<br />
+
+<div class="alert alert-secondary" role="alert">
+
+    <h4>@Html.DisplayFor(model => model.CidadeNome) - @Html.DisplayFor(model => model.Estado.EstadoSigla)</h4>
+
+    <hr>
+
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CidadeNome)
+        </dt>
+        <dd class = "col-sm-10">
+            <i class="fa-solid fa-location-dot"></i> @Html.DisplayFor(model => model.CidadeNome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CidadeCodigoIbge)
+        </dt>
+        <dd class = "col-sm-10">
+            <i class="fa-solid fa-barcode"></i> @Html.DisplayFor(model => model.CidadeCodigoIbge)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+        <dd class = "col-sm-10">
+            <i class="fa-solid fa-map"></i> @Html.DisplayFor(model => model.Estado.EstadoNome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ativo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ativo)
+        </dd>       
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+        <dd class = "col-sm-10">
+            <i class="fa-solid fa-square-plus"></i> @Model.Created.ToString("dd/MM/yyyy HH:MM")
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Updated)
+        </dt>
+        <dd class = "col-sm-10">
+            <i class="fa-solid fa-arrows-rotate"></i> @Model.Updated.ToString("dd/MM/yyyy HH:MM")
+        </dd>
+    </dl>
+</div>
+
+<hr />
+
+<div>
+    <a class="btn btn-dark" asp-action="Edit" asp-route-id="@Model?.CidadeId"><i class="fa-sharp fa-solid fa-pencil"></i> Atualizar</a> &nbsp;
+    <a class="btn btn-warning" asp-action="Index"><i class="fa fa-reply" aria-hidden="true"></i> Voltar</a>
+</div>
+
+<hr />

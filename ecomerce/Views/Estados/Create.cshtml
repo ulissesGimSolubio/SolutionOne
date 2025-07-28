@@ -1,0 +1,107 @@
+﻿@model Ecomerce.Models.Estado
+
+@{
+    ViewData["Title"] = "Criação de Estado (UF)";
+    ViewData["ExistsInativo"] = "Criação de Estado (UF)";
+}
+
+<h3><i class="fa-solid fa-square-plus"></i> Novo Estado (UF) </h3>
+
+<hr />
+
+@{
+    if(ViewData["validate"] != null)
+    {
+        <div class="alert alert-secondary" role="alert">
+            <h5 class="alert-heading">Nota!</h5>
+            <i class="fa-solid fa-circle-info"></i> <b>Avalie a possibilidade de este registro estar inativo, volte a listagem e pesquise por inativos.</b>
+        </div>
+    }
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        * <label asp-for="EstadoNome" class="control-label label-required"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-text-width"></i></span>
+                            <input asp-for="EstadoNome" title="Nome do Estado para identificação." class="form-control" placeholder="Ex. Goi" />
+                        </div>
+                        <span asp-validation-for="EstadoNome" class="text-danger"></span>
+                    </div>
+                   
+                </div>
+
+                <div class="col-md-6">                    
+
+                    <div class="form-group">
+                        * <label asp-for="EstadoSigla" class="control-label label-required"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-text-width"></i></span>
+                            <input asp-for="EstadoSigla" title="Sigla do Estado."class="form-control" placeholder="Ex, GO" />
+                        </div>
+                        <span asp-validation-for="EstadoSigla" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-5">
+
+                    <div class="form-group">
+                        <label asp-for="EstadoCodIbge" class="control-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-text-width"></i></span>
+                            <input asp-for="EstadoCodIbge" title="Código fornecido pelo IBGE."class="form-control" placeholder="Ex, 99999" />
+                        </div>
+                        <span asp-validation-for="EstadoCodIbge" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-5">
+
+                    <div class="form-group">
+                        * <label asp-for="PaisId" class="control-label label-required"></label>                        
+                          <select asp-for="PaisId" id="mySelect" class="form-control" asp-items="ViewBag.PaisId"></select>                       
+                    </div>
+
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="form-group">
+                <button type="submit" title="Gravar as informações do Estado." class="btn btn-dark"><i class="fa-solid fa-floppy-disk"></i> Gravar</button> &nbsp;
+                <a class="btn btn-warning" title="Retornar a lista de Estados." asp-action="Index"><i class="fa-solid fa-circle-arrow-left"></i> Voltar</a>
+            </div>
+
+            <hr />
+
+        </form>
+        
+        <a class="btn btn-dark" asp-area="" title="Efetue o registro de um novo Pais." asp-controller="Paises" asp-action="Index"><i class="fa-solid fa-globe"></i> &nbsp; Novo Pais</a>
+
+        <hr />
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

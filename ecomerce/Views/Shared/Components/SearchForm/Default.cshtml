@@ -1,0 +1,60 @@
+﻿@{
+    int itensPorPaginaInt = Convert.ToInt32(ViewData["itensPorPagina"]);
+    //List<int> paginas = ViewData["paginas"] as List<int> ?? new List<int> { 2, 5, 10, 20, 50, 100, 500, 1000 };
+    var paginas = Ecomerce.Extensions.ConfigurationValuesDefaults.Pagination;
+    string busca = ViewData["busca"] as string ?? "";
+    bool ativo = (bool)(ViewData["ativo"] ?? true);
+}
+
+<form asp-action="Index" class="form-inline">
+    <div class="input-group">
+
+        @*<label class="text-white mr-2">Status:</label>*@
+        <select 
+            name="ativo" 
+            title="Selecione o Status que deseja ver na consulta, por padrão considerado a situação ativo."
+            class="custom-select bg-dark text-white py-1" 
+            @*style="width: 100px; text-align: center">*@
+            style="text-align: center">
+            @if (ativo)
+            {
+                <option selected value="true">Ativos</option>
+                <option value="false">Inativos</option>
+            }
+            else
+            {
+                <option value="true">Ativos</option>
+                <option selected value="false">Inativos</option>
+            }
+        </select>
+        <select 
+            name="itensPorPagina"
+            title="Selecione a quantidade de páginas que deseja ver no resultado da busca."
+            class="custom-select bg-dark text-white ml-2 py-1" 
+            @*style="width: 100px; text-align: center">*@
+            style="text-align: center">
+
+            @foreach (var item in paginas)
+            {
+                if (itensPorPaginaInt == item)
+                {
+                    <option selected value="@item">@item Pág</option>
+                }
+                else
+                {
+                    <option value="@item">@item Pág</option>
+                }
+            }
+
+        </select>
+
+        <input class="form-control mr-sm-3"
+               type="search"
+               title="Para efetuar a consulta, basta digitar neste campo e clicar em Buscar ou apertar enter no próprio campo."
+               name="busca"
+               placeholder="Informe a sua busca"
+               aria-label="Buscar"               
+               value="@busca">
+        <button class="btn btn-dark mr-sm-3" type="submit" title="Busque por uma informação relevante."><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+    </div>
+</form>

@@ -1,0 +1,152 @@
+﻿@model IEnumerable<Ecomerce.Models.Cidade>
+
+@{
+    ViewData["Title"] = "Cidades";
+    int itensPorPaginaInt = Convert.ToInt32(ViewData["itensPorPagina"]);
+    var paginas = Ecomerce.Extensions.ConfigurationValuesDefaults.Pagination;
+    var count = Convert.ToInt32(ViewData["count"]);
+    string busca = ViewData["busca"] as string ?? "";
+    @* ativos ou não *@
+    var ativo = (bool)(ViewData["ativo"] ?? true);
+    var msgDelete = TempData["delete"] as string;
+    var msgSave = TempData["save"] as string;
+    var msgUpdate = TempData["update"] as string;
+    var exception = TempData["exception"] as string;
+}
+
+<h1><i class="fa-solid fa-location-dot"></i> Cidades</h1>
+
+<br />
+
+<a asp-action="Create" class="btn btn-dark" title="Efetue o registro de uma nova Cidade, mas lembre-se, para uma Cidade você precisa de um estado para vincular."><i class="fa-solid fa-map"></i> &nbsp; Nova Cidade</a>
+<a class="btn btn-dark" asp-area="" title="Efetue o registro de um novo Estado." asp-controller="Estados" asp-action="Index"><i class="fa-solid fa-map"></i> &nbsp; Novo Estado</a>
+
+
+<br />
+<br />
+
+@if (msgDelete != null)
+{
+    <div id="alert" class="alert alert-danger" role="alert">
+        &#128721 @msgDelete@exception
+    </div>
+
+    <script>
+        // Fecha o alerta após 5 segundos
+        setTimeout(function () {
+            $('#alert').fadeOut('slow');
+        }, 5000);
+    </script>
+}
+
+@if (msgSave != null || msgUpdate != null)
+{
+    <div id="alert" class="alert alert-secondary" role="alert">
+        <i class="fa-solid fa-check-to-slot"></i> @msgSave@msgUpdate
+    </div>
+
+    <script>
+        // Fecha o alerta após 5 segundos
+        setTimeout(function () {
+            $('#alert').fadeOut('slow');
+        }, 5000);
+    </script>
+}
+
+@* Componente de paginação e pesquisa *@
+
+<div class="d-flex justify-content-end">
+
+    @* Componente de pesquisa *@
+    @await Component.InvokeAsync("SearchForm", new { itensPorPagina = itensPorPaginaInt, paginas = paginas, busca = busca, ativo = (bool)(ViewData["ativo"] ?? true) })
+
+</div>
+
+<br />
+
+@* Tabela com os dados *@
+
+<div class="table-responsive">
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th title="Nome da Cidade." class="col-md-2">
+                <i class="fa-solid fa-sort"></i> <a href="#" class="sort-link" data-column="CidadeNome">
+                    @Html.DisplayNameFor(model => model.CidadeNome)
+                    <span class="sort-icon"></span>
+                </a>
+            </th>
+            <th title="Código fornecido pelo IBGE.." class="col-md-2">
+                <i class="fa-solid fa-sort"></i> <a href="#" class="sort-link" data-column="CidadeCodigoIbge">
+                    @Html.DisplayNameFor(model => model.CidadeCodigoIbge)
+                    <span class="sort-icon"></span>
+                </a>
+            </th>
+            <th title="Sigla do Estado que a cidade faz parte." class="col-md-2">
+                <i class="fa-solid fa-sort"></i> <a href="#" class="sort-link" data-column="EstadoSigla">
+                    @Html.DisplayNameFor(model => model.Estado.EstadoSigla)
+                    <span class="sort-icon"></span>
+                </a>
+            </th>
+            <th title="Nome do Estado que a cidade faz parte." class="col-md-3">
+                <i class="fa-solid fa-sort"></i> <a href="#" class="sort-link" data-column="EstadoNome">
+                    @Html.DisplayNameFor(model => model.Estado.EstadoNome)
+                    <span class="sort-icon"></span>
+                </a>
+            </th>
+            <th title="Status se o registro está ativo ou inativo." class="col-md-3">
+                <i class="fa-solid fa-sort"></i> <a href="#" class="sort-link" data-column="Ativo">
+                    @Html.DisplayNameFor(model => model.Ativo)
+                    <span class="sort-icon"></span>
+                </a>
+            </th>            
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td data-column="CidadeNome" title="@item.CidadeNome">
+                    @Html.DisplayFor(modelItem => item.CidadeNome)
+                </td>
+                <td data-column="CidadeCodigoIbge" title="@item.CidadeCodigoIbge">
+                    @Html.DisplayFor(modelItem => item.CidadeCodigoIbge)
+                </td>
+                <td data-column="EstadoSigla" title="@item.Estado.EstadoSigla">
+                    @Html.DisplayFor(modelItem => item.Estado.EstadoSigla)
+                </td>
+                <td data-column="EstadoNome" title="@item.Estado.EstadoNome">
+                    @Html.DisplayFor(modelItem => item.Estado.EstadoNome)
+                </td>
+                <td data-column="Ativo" title="@item.Ativo">
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>                
+                <td>
+                    @* Botões de ação do TagHelper *@
+                    <tagHelperButton ctype-button="Editar" croute-id="@item.CidadeId"></tagHelperButton>
+                    <tagHelperButton ctype-button="Detalhes" croute-id="@item.CidadeId"></tagHelperButton>
+                    <tagHelperButton ctype-button="Remover" croute-id="@item.CidadeId"></tagHelperButton>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+
+<br />
+
+<div class="d-flex justify-content-end">
+
+    @* Componente de paginação *@
+    @await Component.InvokeAsync("Pagination", new { pagina = Convert.ToInt32(ViewData["pagina"]), totalPaginas = Convert.ToInt32(ViewData["totalPaginas"]), itensPorPagina = Convert.ToInt32(ViewData["itensPorPagina"]) })
+
+</div>
+
+
+<vc:counter model-count="@Model.Count()"></vc:counter>
+
+<div class="alert alert-secondary" role="alert">
+    <h5 class="alert-heading">Nota!</h5>
+    <i class="fa-solid fa-circle-info"></i> Para efetuar a consulta, basta <b>digitar no campo de busca</b> e clicar em <b>Buscar</b> ou <b>apertar enter</b> no próprio campo.
+</div>

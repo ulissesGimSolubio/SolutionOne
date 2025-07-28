@@ -1,0 +1,102 @@
+﻿@model Ecomerce.Models.Cidade
+
+@{
+    ViewData["Title"] = "Atualização de Cidade";
+    ViewData["ExistsInativo"] = "";
+}
+
+<h3><i class="fa-solid fa-rotate-right"></i> Atualizando Cidade</h3>
+
+<hr />
+
+@{
+    if (ViewData["validate"] != null)
+    {
+        <div class="alert alert-secondary" role="alert">
+            <h5 class="alert-heading">Nota!</h5>
+            <i class="fa-solid fa-circle-info"></i> <b>Avalie a possibilidade de este registro estar inativo, volte a listagem e pesquise por inativos.</b>
+        </div>
+    }
+}
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CidadeId" />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <select title="Status do registro." asp-for="Ativo" class="custom-select bg-dark text-white py-1" style="width: 100px; text-align: center">
+                            <option value="true">Ativo</option>
+                            <option value="false">Inativo</option>
+                        </select>
+                        <span asp-validation-for="Ativo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        * <label asp-for="CidadeNome" class="control-label label-required"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-text-width"></i></span>
+                            <input asp-for="CidadeNome" title="Nome da Cidade para identificação." class="form-control" placeholder="Ex. Jataí" />
+                        </div>
+                        <span asp-validation-for="CidadeNome" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        * <label asp-for="CidadeCodigoIbge" class="control-label label-required"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-text-width"></i></span>
+                            <input asp-for="CidadeCodigoIbge" title="Código fornecido pelo IBGE." class="form-control" placeholder="Ex, 5211909" />
+                        </div>
+                        <span asp-validation-for="CidadeCodigoIbge" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-5">
+
+                    <div class="form-group">
+                        * <label asp-for="EstadoId" class="control-label label-required"></label>
+                        <select asp-for="EstadoId" id="mySelect" class="form-control" asp-items="ViewBag.EstadoId"></select>
+                    </div>
+
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="form-group">
+                <button type="submit" title="Gravar as informações da Cidade." class="btn btn-dark"><i class="fa-solid fa-floppy-disk"></i> Gravar</button> &nbsp;
+                <a class="btn btn-warning" title="Retornar a lista de Cidades." asp-action="Index"><i class="fa-solid fa-circle-arrow-left"></i> Voltar</a>
+            </div>
+
+            <hr />
+
+        </form>
+
+        <a asp-action="Create" class="btn btn-dark" title="Efetue o registro de um novo Estado, mas lembre-se, para um Estado você precisa de um país para vincular."><i class="fa-solid fa-map"></i> &nbsp; Novo Estado</a>
+
+        <hr />
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

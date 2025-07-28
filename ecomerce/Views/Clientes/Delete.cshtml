@@ -1,0 +1,154 @@
+﻿@model Ecomerce.Models.Cliente
+
+@{
+    ViewData["Title"] = "Excluir Parceiro de Negócios";
+}
+
+<h1 class="text-danger"><i class="fa-solid fa-user-tie"></i> <i class="fa fa-trash"></i> Exclusão de Parceiro de Negócios</h1>
+
+<br />
+
+<div class="alert alert-secondary" role="alert">
+    <h4>Parceiro: @Html.DisplayFor(model => model.Nome)</h4>
+    <hr>
+    <div>
+        <div class="row">
+
+            <div class="col-md-8">
+
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.CpfCnpj)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @{
+                            var cpfCnpjFormatado = Ecomerce.Extensions.Helpers.FormatarCpfCnpj(Model.CpfCnpj);
+                        }
+                        @cpfCnpjFormatado
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Nome)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.NomeRazaoSoc)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.NomeRazaoSoc)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Apelido)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Apelido)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Genero)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Genero)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.DataNascimento)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Model.DataNascimento.ToString("dd/MM/yyyy")
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Celular)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @{
+                            var phone_1 = Ecomerce.Extensions.Helpers.FormatCellPhone(Model.Celular);
+                        }
+                        @phone_1
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.TelefoneFixo)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @{
+                            var phone_2 = Ecomerce.Extensions.Helpers.FormatCellPhone(Model.TelefoneFixo);
+                        }
+                        @phone_2
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Ativo)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @{
+                            if (Model.Ativo)
+                            {
+                                <i class="fa fa-check-square" aria-hidden="true"></i>
+                            }
+                            else
+                            {
+                                <i class="fa fa-square-o" aria-hidden="true"></i>
+                            }
+                        }
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Created)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Model.Created.ToString("dd/MM/yyyy HH:MM")
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Updated)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Model.Created.ToString("dd/MM/yyyy HH:MM")
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Image)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Image)
+                    </dd>
+                </dl>
+
+            </div>
+
+            <div class="col-md-4">
+
+                @{
+                    var foto = @Model.Image;
+
+                    if (foto == null)
+                    {
+                        <div class="col-md-4 d-flex justify-content-center align-items-center mt-3">
+                            <img src="~/images/cliente-images/sem_foto.png" class="img-profile" alt="Imagem do cliente">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-4 d-flex justify-content-center align-items-center mt-3">
+                            <img src="~/images/cliente-images/@foto" class="img-profile" alt="Imagem do cliente">
+                        </div>
+                    }
+                }
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Exclusão de registro!</strong> Têm certeza que deseja excluir o parceiro abaixo, esta ação não poderá ser desfeita!
+</div>
+
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="CpfCnpj" />
+    <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Excluir</button>
+    <a class="btn btn-warning" asp-action="Index"><i class="fa fa-reply" aria-hidden="true"></i> Voltar a lista</a>
+</form>

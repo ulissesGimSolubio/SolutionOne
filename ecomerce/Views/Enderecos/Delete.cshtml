@@ -1,0 +1,100 @@
+﻿@model Ecomerce.Models.Endereco
+
+@{
+    ViewData["Title"] = "Exclusão de endereço";    
+}
+
+<h1 class="text-danger"><i class="fa-solid fa-signs-post"></i> <i class="fa-solid fa-trash"></i> Exclusão do Endereço</h1>
+
+<br />
+
+<div id="alert" class="alert alert-secondary" role="alert">
+    <h3>Cliente:</h3>
+    <hr />
+    CPF|CNPJ: <b>@Ecomerce.Extensions.Helpers.FormatarCpfCnpj(Model.Cliente.CpfCnpj)</b><br />
+    Nome: <b>@Model.Cliente.Nome</b><br />
+    Razão Scocial: <b>@Model.Cliente.NomeRazaoSoc</b><br />
+    Contatos Celular: <b>@Ecomerce.Extensions.Helpers.FormatPhone(@Model.Cliente.TelefoneFixo)</b>)<br />
+    Contato Fixo: <b>@Ecomerce.Extensions.Helpers.FormatPhone(@Model.Cliente.TelefoneFixo)</b> <br />
+</div>
+
+<hr />
+
+<div id="alert" class="alert alert-secondary" role="alert">
+    <h3>Endereço:</h3>
+    <hr />
+    @if (Model.Numero == 0 || Model.Numero == null)
+    {
+        @("CEP:") <b>@Ecomerce.Extensions.Helpers.FormatarCep(Model.Cep)</b> @(" Logradouro:") <b>@Model.Logradouro</b> @("Nuúmero:") <b>S/N</b> @("Bairro:")
+
+        <b> @Model.Bairro</b>
+
+        @(".")
+
+        <br />
+    }
+    else
+    {
+        @("CEP:") <b>@Ecomerce.Extensions.Helpers.FormatarCep(Model.Cep)</b> @(" Logradouro:")
+
+        <b>@Model.Logradouro</b> @("Nuúmero:") <b>S/N.</b> @("Bairro:")
+
+        <b> @Model.Bairro</b>
+
+        @(".")
+
+        <br />
+    }
+
+    Complemento: <b>@Model.Complemento</b><br />
+    Informações de Entrega: <b>@Model.InformacaoReferencia</b><br />
+    Cidade: <b>@Model.Cidade.CidadeNome - @Model.Cidade.Estado.EstadoSigla</b><br />
+    @if (Model.EnderecoPrincipal == true)
+    {
+        @("Endereço Principal: ") <b><i class="fa-solid fa-toggle-on"></i></b>
+
+        <br />
+    }
+    else
+    {
+        @("Endereço Principal: ") <b><i class="fa-solid fa-toggle-off"></i></b>
+
+        <br />
+    }
+    @if (Model.Ativo == true)
+    {
+        @("Endereço Principal: ") <b><i class="fa-solid fa-square-check"></i></b>
+
+        <br />
+    }
+    else
+    {
+        @("Endereço Principal: ") <b><i class="fa-regular fa-square"></i></b>
+
+        <br />
+    }
+    Criado em: <b>@Model.Created</b><br />
+    Atualizado em: <b>@Model.Updated</b><br />
+</div>
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Exclusão de registro!</strong> Têm certeza que deseja excluir o endereço acima, esta ação não poderá ser desfeita!
+</div>
+
+<hr />
+
+<form asp-action="Inativar" asp-route-id="@Model.EnderecoId">
+    <input type="hidden" asp-for="@Model.EnderecoId" />
+    <button type="submit" title="Inativa o registro para não aparecer em lançametnos futuros " class="btn btn-dark"><i class="fa-regular fa-square"></i> Inativar </button>
+    &nbsp; <i class="fa-solid fa-circle-arrow-left"></i> <font color="red" size="4"><b>Considere inativar o registro.</b></font>
+</form>
+
+<hr />
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="EnderecoId" />
+    <button type="submit" title="Remove o registro do Endereço." class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Excluir</button> &nbsp;
+    <a class="btn btn-warning" title="Retorna a listagem de Endereços." asp-action="Index"><i class="fa fa-reply" aria-hidden="true"></i> Voltar a lista</a>
+</form>
+
+<hr />

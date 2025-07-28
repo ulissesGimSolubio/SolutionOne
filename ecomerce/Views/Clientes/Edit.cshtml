@@ -1,0 +1,263 @@
+﻿@model Ecomerce.Models.Cliente
+
+@{
+    ViewData["Title"] = "Atualizar Parceiro de Negócios";
+}
+
+<h3><i class="fa-solid fa-arrows-rotate"></i> Atualizando Parceiro de Negócios</h3>
+
+<hr />
+
+@{
+    if (ViewData["validate"] != null)
+    {
+        <div class="alert alert-secondary" role="alert">
+            <h5 class="alert-heading">Nota!</h5>
+            <i class="fa-solid fa-circle-info"></i> <b>Avalie a possibilidade de este registro estar inativo, volte a listagem e pesquise por inativos.</b>
+        </div>
+    }
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+
+                <div class="col-md-5">
+
+                    <div class="form-group">
+                        * <label asp-for="CpfCnpj" class="control-label label-required"></label>
+                        <div class="input-group">
+                            <select disabled asp-for="@Model.TPessoa" id="tipoPessoa" class="custom-select bg-dark text-white py-1" style="width: 100px; text-align: center" onchange="limparCampo()">
+                                <option value="0">FISICA</option>
+                                <option value="1">JURIDICA</option>
+                            </select>
+                            <input readonly asp-for="CpfCnpj" maxlength="18" id="CpfCnpj" class="form-control" />
+                        </div>
+                        <span asp-validation-for="CpfCnpj" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="col-md-7">
+
+                    <div class="form-group">
+                        * <label asp-for="Nome" class="control-label label-required"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-text-width"></i></span>
+                            <input asp-for="Nome" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Nome" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="form-group">
+                        <label asp-for="NomeRazaoSoc" class="control-lab"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-text-width"></i></span>
+                            <input asp-for="NomeRazaoSoc" class="form-control" />
+                        </div>
+                        <span asp-validation-for="NomeRazaoSoc" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="form-group">
+                        * <label asp-for="Email" class="control-label label-required"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">@@</span>
+                            <input asp-for="Email" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="form-group">
+                        <label asp-for="Apelido" class="control-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-text-width"></i></span>
+                            <input asp-for="Apelido" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Apelido" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label asp-for="Celular" class="control-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone-square" aria-hidden="true"></i></span>
+                            <input asp-for="Celular" id="phoneInputMask_Movel" placeholder="(XX) X XXXX-XXXX" data-mask="(XX) X XXXX-XXXX" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Celular" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label asp-for="TelefoneFixo" class="control-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone-square" aria-hidden="true"></i></span>
+                            <input asp-for="TelefoneFixo" id="phoneInputMask_fixed" placeholder="(XX) XXXX-XXXX" data-mask="(XX) XXXX-XXXX" class="form-control" />
+                        </div>
+                        <span asp-validation-for="TelefoneFixo" class="text-danger"></span>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        * <label asp-for="Genero" class="control-label label-required"></label>
+                        <select asp-for="Genero" class="form-control">
+                            <option value="MASCULINO">Masculino</option>
+                            <option value="FEMININO">Feminino</option>
+                            <option value="OUTRO">Outro</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        * <label asp-for="DataNascimento" class="control-label label-required"></label>
+                        <input asp-for="DataNascimento" type="date" class="form-control" />
+                        <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="UpImage" class="control-label">Foto para identificação</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-file-image" aria-hidden="true"></i></span>
+                            <input asp-for="UpImage" type="file" class="form-control" data-val="false" />
+                        </div>
+                        <span asp-validation-for="UpImage" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Info" class="control-label"></label>
+                        <textarea asp-for="Info" rows="4" style="width: 100%;"></textarea>
+                        <span asp-validation-for="Info" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <select asp-for="Ativo" class="custom-select bg-dark text-white py-1" style="width: 100px; text-align: center">
+                            <option value="true">Ativo</option>
+                            <option value="false">Inativo</option>
+                        </select>
+                        <span asp-validation-for="Ativo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-dark"><i class="fa-solid fa-floppy-disk"></i> Gravar</button> &nbsp;
+                <a class="btn btn-warning" asp-action="Index"><i class="fa-solid fa-circle-arrow-left"></i> Voltar</a>
+            </div>
+
+            <hr />
+
+        </form>
+
+    </div>
+
+    <div class="col-md-4">
+
+        @{
+            var foto = @Model.Image;
+
+            if (foto == null)
+            {
+                <div id="alert" class="alert alert-secondary" role="alert">
+                    <i class="fa-solid fa-image"></i> A foto será atualizada após selecionar uma nova imagem no campo <b>Foto para Identificação</b> e <b>gravar o registro</b>, na próxima visualização estará disponível.
+                </div>
+
+                <div class="mt-4 text-right">
+                    <img src="~/images/cliente-images/sem_foto.png" class="img-profile-edit ml-auto" alt="Imagem do cliente">
+                </div>
+
+                <br />
+
+                <div id="alert" class="alert alert-secondary" role="alert">
+                    <i class="fa-solid fa-face-smile"></i> Olá, tudo bem contigo? vamos inserir uma foto de identificação?
+                </div>
+            }
+            else
+            {
+                <div id="alert" class="alert alert-secondary" role="alert">
+                    <i class="fa-solid fa-image"></i> A foto será atualizada após selecionar uma nova imagem no campo <b>Foto para Identificação</b> e <b>gravar o registro</b>, na próxima visualização estará disponível.
+                </div>
+
+                <div class="mt-4 text-right" text-right>
+                    <img src="~/images/cliente-images/@foto" class="img-profile-edit ml-auto" alt="Imagem do cliente">
+                </div>
+            }
+        }
+
+        <br />        
+
+        <form asp-action="DeleteFoto" asp-route-id="@Model.CpfCnpj">            
+            <input type="hidden" asp-for="CpfCnpj" />
+            <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Excluir Foto </button>
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

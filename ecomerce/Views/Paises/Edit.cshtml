@@ -1,0 +1,131 @@
+﻿@model Ecomerce.Models.Pais
+
+@{
+    ViewData["Title"] = "Atualizando País";
+}
+
+
+<h3><i class="fa-solid fa-arrows-rotate"></i> Atualizando País</h3>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PaisId" />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <select title="Status do registro." asp-for="Ativo" class="custom-select bg-dark text-white py-1" style="width: 100px; text-align: center">
+                            <option value="true">Ativo</option>
+                            <option value="false">Inativo</option>
+                        </select>
+                        <span asp-validation-for="Ativo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        * <label asp-for="PaisNome" class="control-label label-required"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-text-width"></i></span>
+                            <input asp-for="PaisNome" title="Nome do País em liguagem nacional." class="form-control" title="Nome do País em liguagem nacional" placeholder="Ex. BRASIL" />
+                        </div>
+                        <span asp-validation-for="PaisNome" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="PaisNomeIngles" class="control-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-text-width"></i></span>
+                            <input asp-for="PaisNomeIngles" title="Nome do País em liguagem estrângeira." class="form-control" title="Nome do País em Inglês" placeholder="Ex. BRAZIL" />
+                        </div>
+                        <span asp-validation-for="PaisNomeIngles" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label asp-for="PaisIsoCodigo" class="control-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-barcode"></i></span>
+                            <input asp-for="PaisIsoCodigo" title="Código do País definido em ISO." class="form-control" title="Código do País ISO" placeholder="Ex. BRA" />
+                        </div>
+                        <span asp-validation-for="PaisIsoCodigo" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label asp-for="PaisCodigo" class="control-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-barcode"></i></span>
+                            <input asp-for="PaisCodigo" title="Código do País mundialmente."  class="form-control" title="Código do País" da moeda" placeholder="Ex. BR" />
+                        </div>
+                        <span asp-validation-for="PaisCodigo" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label asp-for="PaisMoeda" class="control-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-coins"></i></span>
+                            <input asp-for="PaisMoeda" title="Nome da Moeda utilizada pelo País." class="form-control" title="Nome da moeda" placeholder="Ex. REAL" />
+                        </div>
+                        <span asp-validation-for="PaisMoeda" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label asp-for="PaisMoedaAbrev" class="control-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-coins"></i></span>
+                            <input asp-for="PaisMoedaAbrev" title="Abreviatura da moeda utilizada." class="form-control" title="Abreviatura da moeda do País" placeholder="Ex. R$" />
+                        </div>
+                        <span asp-validation-for="PaisMoedaAbrev" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr />
+
+            <div class="form-group">
+                <button type="submit" title="Gravar as informações." class="btn btn-dark"><i class="fa-solid fa-floppy-disk"></i> Gravar</button> &nbsp;
+                <a class="btn btn-warning" title="Voltar a listagem de Paises." asp-action="Index"><i class="fa-solid fa-circle-arrow-left"></i> Voltar</a>
+            </div>
+
+            <hr />
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
