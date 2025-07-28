@@ -2,20 +2,21 @@ Primeira Solução Funcional em ASP.NET
 
 Cadastro de Clientes:
 
-![image](https://github.com/ulissesgimenes/SolutionOne/assets/12112777/d7803d58-f2a1-4432-b3fb-6185b50d6dea)
+<img width="831" height="446" alt="image" src="https://github.com/user-attachments/assets/794d152c-b1b9-4695-ad04-7a63d6dbb223" />
 
 Endereços do cliente:
 
-![image](https://github.com/ulissesgimenes/SolutionOne/assets/12112777/ae01451d-6855-45b2-b6d6-49fee7feb37f)
+<img width="836" height="467" alt="image" src="https://github.com/user-attachments/assets/88822867-d8e1-4804-8552-006004b19548" />
 
 Atualização de Endereço:
 
-![image](https://github.com/ulissesgimenes/SolutionOne/assets/12112777/b3c9ec16-e483-4d89-b0f5-2e58be394262)
+<img width="833" height="426" alt="image" src="https://github.com/user-attachments/assets/bf41e790-2be7-42ea-aa94-60c68fd6d77b" />
 
 Layout de Cadastros:
 
-![image](https://github.com/ulissesgimenes/SolutionOne/assets/12112777/809ee20c-4efb-4399-bfe7-62c8bb1d8254)
+<img width="810" height="376" alt="image" src="https://github.com/user-attachments/assets/dbf3cf49-c837-4720-965f-123788605dd9" />
 
 Listagem de Clientes:
 
-![image](https://github.com/ulissesgimenes/SolutionOne/assets/12112777/04420fb2-0df4-4627-86c0-77df534ccf0c)
+<img width="831" height="348" alt="image" src="https://github.com/user-attachments/assets/7ce320e6-fcb8-449e-b1fa-7a08139df10c" />
+
